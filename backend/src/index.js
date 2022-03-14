@@ -16,7 +16,10 @@ initFireBase()
 const db = getFirestore();
 
 app.get('/modules', async (req, res) => {
-  const data = await getModules()
+
+  const { module_id } = req.body
+
+  const data = await getModules(module_id)
 
   res.json(data)
 })
