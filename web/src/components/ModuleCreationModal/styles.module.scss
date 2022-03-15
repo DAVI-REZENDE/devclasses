@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  header {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+
+    .closeModal {
+      background: transparent;
+      font-size: 1.6rem;
+    }
+  }
+
+  form {
+    display: flex;
+    gap: 0.8rem;
+    width: 100%;
+    margin-top: 1.6rem;
+
+    input {
+      flex: 1;
+      background-color: var(--gray-500);
+      padding: 1.6rem;
+      font-size: 1.6rem;
+      border-radius: 10px;
+      border: 1px solid var(--gray-100);
+    }
+
+    button {
+      background-color: var(--pink-500);
+      padding: 1.6rem;
+      border-radius: 10px;
+      font-size: 1.6rem;
+      font-weight: 500;
+      flex: 0.2;
+    }
+  }
+}

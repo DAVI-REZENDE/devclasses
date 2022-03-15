@@ -1,0 +1,33 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  .buttons {
+    width: 100%;
+    display: flex;
+    gap: 1.6rem;
+  
+    button {
+      padding: 1.6rem;
+      border-radius: 10px;
+      flex: 1;
+
+      font-size: 1.6rem;
+      font-weight: 600;
+      transition: filter .2s;
+
+      &:hover {
+        filter: brightness(0.8)
+      }
+
+      &.yes {
+        background-color: var(--pink-500);
+      }
+
+      &.no {
+        background-color: var(--gray-500);
+      }
+    }
+  }
+}

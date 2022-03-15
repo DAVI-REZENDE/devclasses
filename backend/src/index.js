@@ -1,7 +1,13 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
 const port = 3030
-app.use(express.json());
+
+app.use(cors({
+  origin: 'http://localhost:3000'
+}))
+
+app.use(express.json())
 
 const { v4: uuidv4 } = require('uuid');
 
@@ -21,7 +27,7 @@ app.get('/modules', async (req, res) => {
 
   const data = await getModules(module_id)
 
-  res.json(data)
+  res.status(200).json(data)
 })
 
 app.post('/modules', async (req, res) => {
@@ -41,7 +47,7 @@ app.post('/modules', async (req, res) => {
       return;
     }
 
-    return res.status(400).json({ message: "Nome ja existente" })
+    return res.status(200).json({ message: "Nome ja existente" })
 
   } catch (err) {
     res.send(`Error: ${err}`).status(400)
@@ -208,6 +214,39 @@ app.delete('/classes', async (req, res) => {
     }, { merge: true });
 
     res.status(200).send({ ok: true })
+  } catch (error) {
+    res.status(400).send(error.message)
+  }
+})
+
+app.get('/user_admin', async (req, res) => {
+
+  try {
+    const snapshot = await db.collection('users-admins').doc('users').get()
+
+    res.status(200).send({ data: snapshot.data() })
+    
+  } catch (error) {
+    res.status(400).send(error.message)
+  }
+})
+
+app.post('/user_admin', async (req, res) => {
+  const { email } = req.body
+
+  console.log(email);
+
+  try {
+    const docRef = db.collection('users-admins').doc('users')
+
+    await docRef.update({
+      list: FieldValue.arrayUnion({
+        email
+      })
+    }, { merge: true })
+
+    res.status(200).send({ ok: true })
+    
   } catch (error) {
     res.status(400).send(error.message)
   }

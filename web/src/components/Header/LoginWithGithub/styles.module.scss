@@ -1,0 +1,44 @@
+.button {
+  background-color: var(--gray-800);
+  border-radius: 100px;
+  padding: 1.6rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+
+  font-size: 1.6rem;
+  font-weight: 600;
+
+  transition: filter .2s;
+
+  &:hover {
+    filter: brightness(0.9)
+  }
+}
+
+.buttonLogged {
+  background-color: var(--green-transparent);
+  border-radius: 100px;
+  padding: .8rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+
+  font-size: 1.6rem;
+  font-weight: 600;
+
+  transition: filter .2s;
+
+  img {
+    width: 3.6rem;
+    border-radius: 50%;
+  }
+
+  &:hover {
+    filter: brightness(0.9)
+  }
+}

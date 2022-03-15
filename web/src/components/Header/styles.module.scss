@@ -1,0 +1,15 @@
+.header {
+  height: 85px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  border-bottom: 2px solid var(--gray-100);
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1080px;
+    width: 100%;
+  }
+}

@@ -1,0 +1,28 @@
+.card {
+  padding: 1.6rem;
+  border-radius: 1rem;
+  border: 2px solid var(--gray-100);
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+  transition: transform .2s;
+  max-width: 255px;
+  width: 100%;
+
+  &:hover {
+    transform: translateY(-0.5rem);
+  }
+
+  strong {
+    font-size: 2.4rem;
+  }
+
+  span {
+    background: var(--green-500);
+    border-radius: 100px;
+    padding: .2rem 1.2rem;
+    width: max-content;
+    color: var(--gray-500);
+    font-weight: bold;
+  }
+}

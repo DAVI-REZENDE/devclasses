@@ -1,0 +1,59 @@
+.container {
+  max-width: 1080px;
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 3.2rem;
+
+  .titleAdmin {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+      padding: 0.8rem 1.6rem;
+      background-color: var(--pink-500);
+      border-radius: 10px;
+
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+
+      font-size: 1.6rem;
+      font-weight: 600;
+
+      transition: filter .2s;
+
+      &:hover {
+        filter: brightness(0.8)
+      }
+    }
+  }
+
+  h1 {
+    margin-top: 4.2rem;
+    font-size: 4.8rem;
+    font-weight: 900;
+  }
+
+  .details {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 0.4rem;
+
+    .circle {
+      width: 5px;
+      height: 5px;
+      border-radius: 10px;
+      background-color: var(--white);
+    }
+  }
+
+  main {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.6rem;
+  }
+}

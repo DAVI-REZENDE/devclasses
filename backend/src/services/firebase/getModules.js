@@ -5,10 +5,10 @@ module.exports = async (module_id) => {
 
   if(module_id) {
     const snapshot = await db.collection('modules').where('module_id', '==', module_id).get();
-    let data = []
+    let data
   
     snapshot.forEach((doc) => {
-     data.push(doc.data());
+     data = doc.data()
     });
 
     return data
