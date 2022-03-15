@@ -16,7 +16,7 @@ The Next.js framework was used, which is made on top of ReactJS, for the use of 
 - ExpressJS
 - CORS
 
-### After running git clone in the desired folder:
+### After running `git clone` in the desired folder:
 
 ```bash
 cd /backend
