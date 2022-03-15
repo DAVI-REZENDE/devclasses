@@ -1,4 +1,4 @@
-# devclasses (web)
+# devclasses (web 💎 )
 
 <p align="center">
   <img alt="Preview" src="https://raw.githubusercontent.com/DAVI-REZENDE/devclasses/master/assets/preview-home.png" />
