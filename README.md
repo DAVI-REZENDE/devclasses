@@ -3,7 +3,7 @@ In this project the user can access modules and development classes for free, if
 The Next.js framework was used, which is made on top of ReactJS, for the use of the server side rendering (SSR) and static site generator (SSG) methods, to record all the data, the firebase database and api were used, this process is explained better in the `backend` folder
 
 <p align="center">
-  <img alt="Preview" src="https://raw.githubusercontent.com/DAVI-REZENDE/devclasses/main/assets/preview-home.png" />
+  <img alt="Preview" src="https://raw.githubusercontent.com/DAVI-REZENDE/devclasses/master/assets/preview-home.png" />
 </p>
 
 ## Technologies used in the project:
