@@ -27,7 +27,7 @@ app.use(cors({
 ## Config Firebase
 
 If you don't have a firebase account yet, create one and start a new project with the name of the application or whatever. After the project has been created select `Firestore Database` from the side menu and start the service.
-Access the google cloud platform console, select the project you just created and click on `APIs and services > Credentials`, create the OAuth client IDs, and download the `json` file to your project root, it should look like thereby:
+Access the [google cloud platform console](https://console.cloud.google.com/apis/credentials), select the project you just created and click on `APIs and services > Credentials`, create the OAuth client IDs, and download the `json` file to your project root, it should look like thereby:
 
 ```json
 {
