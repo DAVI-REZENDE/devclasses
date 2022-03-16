@@ -21,16 +21,10 @@ The Next.js framework was used, which is made on top of ReactJS, for the use of 
 ```bash
 cd /backend
 yarn install
-#our
+# our
 npm install
-
-yarn start
-#our
-npm start
-
-#After running these commands your backend will be running on port 3030
-
 ```
+>**Warning:** before starting the server see how to configure the `firebase` of the `backend` directory
 
 ### Open another terminal window and run in the web folder:
 _It is important that port 3000 is free otherwise the project will fail._
