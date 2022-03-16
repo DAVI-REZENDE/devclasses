@@ -10,7 +10,7 @@ interface ClassCardProps {
 
 export function ClassCard({id, title, duration}: ClassCardProps) {
 
-  const durationInMinutes = Math.floor((Number(duration) / 1000) / 60)
+  const durationInMinutes = Math.floor((Number(duration) / 1000) / 6)
 
   return (
     <article className={styles.card}>

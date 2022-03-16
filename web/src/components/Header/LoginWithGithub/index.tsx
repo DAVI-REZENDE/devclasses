@@ -6,8 +6,6 @@ import styles from './styles.module.scss'
 export function LoginWithGithub() {
   const { data: session } = useSession()
 
-  console.log(session);
-
   if(session) {
     return (
       <button onClick={() => signOut()} className={styles.buttonLogged} type="button">

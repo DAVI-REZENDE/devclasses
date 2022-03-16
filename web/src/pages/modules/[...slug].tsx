@@ -38,13 +38,14 @@ export default function Module({ data, createdByUser }: ModuleProps) {
     const durationAllClasses = data.classes?.map(item => Number(item.duration))
     durationAllClasses?.forEach(duration => allDurations += duration)
 
-    setTotalDurationInMinutes(Math.floor((allDurations / 1000) / 60))
+    setTotalDurationInMinutes(Math.floor((allDurations / 1000) / 6))
 
     checkAdmin()
-  }, [modalNewClassIsOpen])
+  }, [modalNewClassIsOpen, session])
 
   async function checkAdmin() {
-    if(createdByUser === session?.user.email) {
+    console.log(session)
+    if(createdByUser === await session?.user.email) {
       setIsAdmin(true)
       return;
     }

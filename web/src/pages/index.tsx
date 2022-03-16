@@ -21,6 +21,9 @@ interface ModulesProps {
 }
 
 export default function Home({ modules }: ModulesProps) {
+
+  // console.log(modules)
+
   const { data: session } = useSession()
   const [modalAdminIsOpen, setModalAdmimIsOpen] = useState(false)
   const [modalCreationModuleIsOpen, setModalCreationModuleIsOpen] = useState(false)
@@ -59,16 +62,19 @@ export default function Home({ modules }: ModulesProps) {
       ) : <h1>Modulos disponiveis</h1>}
 
       <section className={styles.listModules}>
-        {modules.map(moduleItem => (
-          <ModuleCard
-            key={moduleItem.id}
-            id={moduleItem.id}
-            title={moduleItem.name}
-            durationModule={moduleItem.duration_module}
-            classes={moduleItem.classes}
-            createdByUser={moduleItem.created_by_user}
-          />
-        ))}
+        {modules.map(moduleItem => {
+          // console.log(moduleItem.duration_module)
+          return (
+            <ModuleCard
+              key={moduleItem.id}
+              id={moduleItem.id}
+              title={moduleItem.name}
+              durationModule={moduleItem.duration_module}
+              classes={moduleItem.classes}
+              createdByUser={moduleItem.created_by_user}
+            />
+          )
+        })}
       </section>
 
       <AdminModal modalIsOpen={modalAdminIsOpen} setModalIsOpen={setModalAdmimIsOpen} />

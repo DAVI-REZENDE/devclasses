@@ -11,7 +11,7 @@ Modal.setAppElement('#__next');
 
 interface NewClassModalProps {
   modalIsOpen: boolean
-  setModalIsOpen: (boolen) => void,
+  setModalIsOpen: (boolean) => void,
   moduleName: string
 }
 
@@ -33,6 +33,7 @@ export function NewClassModal({modalIsOpen, setModalIsOpen, moduleName}: NewClas
        newClassDate.trim() === '' ||
        newClassDuration === 0) {
       alert('Preencha todos os campos de forma correta')
+      return;
     }
     
     const data = {
@@ -41,7 +42,7 @@ export function NewClassModal({modalIsOpen, setModalIsOpen, moduleName}: NewClas
       name: newClassName,
       stream_date: newClassDate,
       module: moduleName,
-      duration: (newClassDuration * 1000)
+      duration: (newClassDuration * 6000)
     }
 
     console.log(data);

@@ -23,9 +23,14 @@ export function ModuleCard({
 
   useEffect(() => {
     let allDurations = 0
-    durationModule.forEach(duration => allDurations += duration)
-
-    setTotalDurationInMinutes(Math.floor((allDurations / 1000) / 60))
+    durationModule.forEach(duration => {
+      allDurations = allDurations + duration
+    })
+    
+    setTotalDurationInMinutes(Math.floor((allDurations / 1000) / 6))
+    
+    // console.log(allDurations, "oi");
+    // console.log(durationModule, totalDurationInMinutes)
   }, [])
 
   return (
