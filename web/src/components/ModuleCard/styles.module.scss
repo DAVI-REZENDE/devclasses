@@ -8,6 +8,22 @@
   transition: transform .2s;
   max-width: 255px;
   width: 100%;
+  position: relative;
+
+  .editButton {
+    position: absolute;
+    right: 1.6rem;
+    top: 1.6rem;
+
+    background-color: var(--gray-500);
+    border-radius: 2px;
+    font-size: 1.8rem;
+    transition: color .2s;
+
+    &:hover {
+      color: #fff;
+    }
+  }
 
   &:hover {
     transform: translateY(-0.5rem);
@@ -15,6 +31,7 @@
 
   strong {
     font-size: 2.4rem;
+    cursor: pointer;
   }
 
   span {

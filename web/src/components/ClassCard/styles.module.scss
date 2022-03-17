@@ -1,11 +1,13 @@
 .card {
   padding: 1.6rem;
-  padding-right: 4rem;
+  max-width: 170px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
   border: 2px solid var(--gray-100);
   border-radius: 10px;
+  position: relative;
 
   transition: transform .2s;
   cursor: pointer;
@@ -20,5 +22,13 @@
 
   .play {
     font-size: 2.4rem;
+  }
+
+  .editButton {
+    position: absolute;
+    right: 1.6rem;
+    bottom: 1.6rem;
+    background-color: var(--gray-500);
+    font-size: 1.6rem;
   }
 }

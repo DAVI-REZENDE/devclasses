@@ -1,10 +1,12 @@
+import { v4 as uuidv4 } from 'uuid';
 import { GetStaticProps } from 'next'
 import { useSession } from 'next-auth/react'
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import { FaPlus } from 'react-icons/fa'
 import { AdminModal } from '../components/AdminModal'
 import { ModuleCard } from '../components/ModuleCard'
-import { ModuleCreationModal } from '../components/ModuleCreationModal'
+import { ModalWithInput } from '../components/ModalWithInput'
 import { api } from '../services/api'
 import styles from './home.module.scss'
 
@@ -22,9 +24,8 @@ interface ModulesProps {
 
 export default function Home({ modules }: ModulesProps) {
 
-  // console.log(modules)
-
   const { data: session } = useSession()
+  const router = useRouter()
   const [modalAdminIsOpen, setModalAdmimIsOpen] = useState(false)
   const [modalCreationModuleIsOpen, setModalCreationModuleIsOpen] = useState(false)
 
@@ -49,6 +50,25 @@ export default function Home({ modules }: ModulesProps) {
     
   }
 
+  async function newModule(newName: string) {
+    
+    const data = {
+      module_id: uuidv4(),
+      module_name: newName,
+      created_by_user: session.user.email,
+      classes: []
+    }
+    const response = await api.post('modules', data).then(res => res.data)
+
+    if(response.message) {
+      alert(response.message);
+      return;
+    }
+
+    router.push(`/modules/${data.module_id}/${session.user.email}`)
+  }
+
+
   return (
     <main className={styles.main}>
       {session ? (
@@ -63,7 +83,6 @@ export default function Home({ modules }: ModulesProps) {
 
       <section className={styles.listModules}>
         {modules.map(moduleItem => {
-          // console.log(moduleItem.duration_module)
           return (
             <ModuleCard
               key={moduleItem.id}
@@ -78,7 +97,7 @@ export default function Home({ modules }: ModulesProps) {
       </section>
 
       <AdminModal modalIsOpen={modalAdminIsOpen} setModalIsOpen={setModalAdmimIsOpen} />
-      <ModuleCreationModal modalIsOpen={modalCreationModuleIsOpen} setModalIsOpen={setModalCreationModuleIsOpen} />
+      <ModalWithInput onClick={newModule} modalIsOpen={modalCreationModuleIsOpen} setModalIsOpen={setModalCreationModuleIsOpen} />
     </main>
   )
 }

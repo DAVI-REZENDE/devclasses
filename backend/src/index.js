@@ -89,7 +89,7 @@ app.put('/modules', async (req, res) => {
 })
 
 app.delete('/modules', async (req, res) => {
-  const { module_name } = req.body
+  const {module_name} = req.body
 
   try {
     let moduleId
@@ -157,26 +157,36 @@ app.post('/classes', async (req, res) => {
 
 app.put('/classes', async (req, res) => {
   const {
-    module_name,
     ...rest
   } = req.body
-  console.log(rest)
+
   try {
     let docId
 
     const getDocId =  db.collection('modules')
-    const snapshot = await getDocId.where('module_name', '==', module_name).get()
+    const snapshot = await getDocId.where('module_name', '==', rest.module_name).get()
 
     snapshot.forEach(doc => {
       docId = doc.id
     })
 
     const docRef = db.collection('modules').doc(docId)
+    const getClasses = await docRef.get()
+    const { module_name, ...current} = rest
+    const classes = getClasses.data().classes.map(item => {
+      if(item.id === rest.id) {
+        item = current
+      }
+
+      return item
+    })
+
     await docRef.set({
-      classes: [rest]
+      classes
     }, { merge: true })
 
     res.status(200).send({ ok: true })
+    // res.json(classes)
 
   } catch (error) {
     res.status(400).send(error.message)

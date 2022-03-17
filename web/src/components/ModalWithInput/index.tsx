@@ -1,58 +1,47 @@
-import { v4 as uuidv4 } from 'uuid';
-import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { FiX } from 'react-icons/fi';
 import Modal from 'react-modal';
-import { api } from '../../services/api';
 
 import styles from './styles.module.scss'
-import { useRouter } from 'next/router';
 
 Modal.setAppElement('#__next');
 
 interface LoginModalProps {
-  modalIsOpen: boolean
-  setModalIsOpen: (boolen) => void
+  modalIsOpen: boolean,
+  setModalIsOpen: (boolen) => void,
+  modalType?: 'creation' | 'update',
+  onClick: (newName: string) => void 
 }
 
-export function ModuleCreationModal({modalIsOpen, setModalIsOpen}: LoginModalProps) {
-  const { data: session } = useSession()
-  const router = useRouter()
-
-  const [nameModule, setNameModule] = useState('')
+export function ModalWithInput({
+  modalIsOpen, 
+  setModalIsOpen, 
+  modalType = 'creation',
+  onClick
+}: LoginModalProps) {
+  const [valueInput, setValueInput] = useState('')
   const [loading, setLoading] = useState(false)
 
   function closeModal() {
     setModalIsOpen(false)
   }
 
-  async function handleCreateMadule(e) {
+  async function handleCreateModule(e) {
     e.preventDefault()
-
     setLoading(true)
-    if(nameModule.trim() === '') {
+
+    if(valueInput.trim() === '') {
       alert('Por favor insira um valor para continuar')
       return;
     }
-
-    const data = {
-      module_id: uuidv4(),
-      module_name: nameModule,
-      created_by_user: session.user.email,
-      classes: []
-    }
-
-    const response = await api.post('modules', data).then(res => res.data)
-
-    if(response.message) {
-      alert(response.message);
-    }
-
-
-    router.push(`/modules/${data.module_id}/${session.user.email}`)
+    
+    onClick(valueInput)
+    
     setLoading(false)
     closeModal()
   }
+
+
 
   return (
     <Modal
@@ -76,20 +65,20 @@ export function ModuleCreationModal({modalIsOpen, setModalIsOpen}: LoginModalPro
     >
       <div className={styles.container}>
         <header>
-          <h1>Novo Modulo</h1>
+          <h1>{modalType === 'creation' ? 'Criar' : 'Atualizar'}</h1>
           <button onClick={closeModal} className={styles.closeModal}>
             <FiX />
           </button>
         </header>        
         <form>
           <input 
-            value={nameModule} 
+            value={valueInput} 
             type="text" 
             placeholder='Insira o nome do seu module: Ex: Cors no nodejs' 
-            onChange={(e) => setNameModule(e.target.value)}
+            onChange={(e) => setValueInput(e.target.value)}
           />
-          <button onClick={handleCreateMadule} type="submit">
-            {loading ? 'Carregando' : 'Criar'}
+          <button onClick={handleCreateModule} type="submit">
+            {loading ? 'Carregando' : 'Enviar'}
           </button>
         </form>
       </div>

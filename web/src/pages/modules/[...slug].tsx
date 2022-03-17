@@ -1,7 +1,10 @@
 import { GetServerSideProps } from "next"
 import { useSession } from "next-auth/react"
+import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { FaPlus } from "react-icons/fa"
+import { FiTrash2 } from "react-icons/fi"
+import { AlertModal } from "../../components/AlertModal"
 import { ClassCard } from "../../components/ClassCard"
 import { NewClassModal } from "../../components/NewClassModal"
 import { api } from "../../services/api"
@@ -28,10 +31,12 @@ interface ModuleProps {
 }
 
 export default function Module({ data, createdByUser }: ModuleProps) {  
+  const router = useRouter()
   const { data: session } = useSession()
   const [totalDurationInMinutes, setTotalDurationInMinutes] = useState(0)
   const [isAdmin, setIsAdmin] = useState<boolean>()
   const [modalNewClassIsOpen, setModalNewClassIsOpen] = useState(false)
+  const [modalAlertOpen, setModalAlertIsOpen] = useState(false)
 
   useEffect(() => {
     let allDurations = 0
@@ -43,9 +48,23 @@ export default function Module({ data, createdByUser }: ModuleProps) {
     checkAdmin()
   }, [modalNewClassIsOpen, session])
 
+  async function deleteModule() {
+
+    try {
+      await api.delete('modules', {data}).then(res => res.data).catch(err => console.log(err))
+      router.push('/')
+    } catch (error) {
+      alert(error.message)
+    }
+    
+  }
+
+  function openAlertModal() {
+    setModalAlertIsOpen(true)
+  }
+
   async function checkAdmin() {
-    console.log(session)
-    if(createdByUser === await session?.user.email) {
+    if(createdByUser === session?.user.email) {
       setIsAdmin(true)
       return;
     }
@@ -60,9 +79,14 @@ export default function Module({ data, createdByUser }: ModuleProps) {
 
       {isAdmin ? (
         <div className={styles.titleAdmin}>
-          <h1>{data.module_name}</h1>
+          <div className={styles.title}>
+            <h1>{data.module_name}</h1>
+            <button onClick={openAlertModal} type="button" >
+              <FiTrash2 />
+            </button>
+          </div>
 
-          <button onClick={handleCreateNewClass} >
+          <button className={styles.newClassButton} onClick={handleCreateNewClass} >
             <FaPlus />
             Criar aula
           </button>
@@ -84,9 +108,18 @@ export default function Module({ data, createdByUser }: ModuleProps) {
             id={classItem.id}
             title={classItem.name}
             duration={classItem.duration}
+            streamDate={classItem.stream_date}
+            module={classItem.module}
+            isAdmin={isAdmin}
           />
         ))}
       </main>
+      <AlertModal 
+        warning="Tem certeza que deseja excluir esse modulo e suas aulas?"
+        modalIsOpen={modalAlertOpen}
+        setModalIsOpen={setModalAlertIsOpen}
+        onClick={deleteModule}
+      />
       <NewClassModal moduleName={data.module_name} modalIsOpen={modalNewClassIsOpen} setModalIsOpen={setModalNewClassIsOpen} />
     </ article>    
   )

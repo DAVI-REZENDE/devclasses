@@ -1,0 +1,15 @@
+.button {
+  background-color: var(--pink-500);
+  padding: 1.6rem;
+  border-radius: 10px;
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.full {
+  flex: 1;
+}
+
+.dark {
+  background-color: var(--gray-500);
+}
