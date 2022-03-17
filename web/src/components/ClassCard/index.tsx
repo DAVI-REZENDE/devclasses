@@ -1,7 +1,7 @@
 import { Tag } from '../Tag'
 import { FaPlay } from 'react-icons/fa'
 import styles from './styles.module.scss'
-import { FiEdit } from 'react-icons/fi'
+import { FiEdit, FiTrash2 } from 'react-icons/fi'
 import { useState } from 'react'
 import { AlertModal } from '../AlertModal'
 import { ModalWithInput } from '../ModalWithInput'
@@ -14,7 +14,8 @@ interface ClassCardProps {
   duration: string,
   isAdmin: boolean,
   streamDate: string,
-  module: string
+  module: string,
+  moduleId: string
 }
 
 export function ClassCard({
@@ -23,15 +24,17 @@ export function ClassCard({
   duration, 
   isAdmin,
   streamDate,
-  module
+  module,
+  moduleId
 }: ClassCardProps) {
 
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [modalDeleteIsOpen, setModaDeletelIsOpen] = useState(false)
   const router = useRouter()
 
   const durationInMinutes = Math.floor((Number(duration) / 1000) / 6)
 
-  async function handleOpenEditClassModal() {
+  function handleOpenEditClassModal() {
     setModalIsOpen(true)
   }
 
@@ -51,6 +54,21 @@ export function ClassCard({
     router.reload()
   }
 
+  function handleDeleteClassModal() {
+    setModaDeletelIsOpen(true)
+  }
+
+  async function deleteClass() {
+    const response = await api.delete('classes', {
+      data: {
+        module_id: moduleId,
+        class_id: id
+      }
+    }).catch(err => console.log(err))
+
+    router.reload()
+  }
+
   return (
     <article className={styles.card}>
       <strong>{title}</strong>
@@ -58,9 +76,14 @@ export function ClassCard({
       <FaPlay className={styles.play} />
 
       {isAdmin && (
-        <button onClick={handleOpenEditClassModal} className={styles.editButton}>
-          <FiEdit />
-        </button>
+        <>
+          <button onClick={handleOpenEditClassModal} className={styles.editButton}>
+            <FiEdit />
+          </button>
+          <button onClick={handleDeleteClassModal} className={styles.deleteButton}>
+            <FiTrash2 />
+          </button>
+        </>
       )}
 
       <ModalWithInput 
@@ -68,6 +91,12 @@ export function ClassCard({
         setModalIsOpen={setModalIsOpen}
         onClick={updateClass}
         modalType='update'
+      />
+      <AlertModal
+        warning='Tem certeza que quer excluir essa aula?'
+        modalIsOpen={modalDeleteIsOpen}
+        setModalIsOpen={setModaDeletelIsOpen}
+        onClick={deleteClass}
       />
     </article>
   )

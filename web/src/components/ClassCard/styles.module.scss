@@ -24,11 +24,18 @@
     font-size: 2.4rem;
   }
 
-  .editButton {
+  button {
     position: absolute;
     right: 1.6rem;
-    bottom: 1.6rem;
     background-color: var(--gray-500);
     font-size: 1.6rem;
+
+    &.editButton {
+      bottom: 1.6rem;
+    }
+
+    &.deleteButton {
+      top: 1.6rem;
+    }
   }
 }

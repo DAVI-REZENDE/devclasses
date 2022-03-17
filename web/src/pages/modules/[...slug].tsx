@@ -111,6 +111,7 @@ export default function Module({ data, createdByUser }: ModuleProps) {
             streamDate={classItem.stream_date}
             module={classItem.module}
             isAdmin={isAdmin}
+            moduleId={data.module_id}
           />
         ))}
       </main>

@@ -186,7 +186,6 @@ app.put('/classes', async (req, res) => {
     }, { merge: true })
 
     res.status(200).send({ ok: true })
-    // res.json(classes)
 
   } catch (error) {
     res.status(400).send(error.message)
@@ -214,8 +213,6 @@ app.delete('/classes', async (req, res) => {
     const filteredClasses = classes.filter((item) => {
       return item.id !== class_id
     })
-
-    console.log(filteredClasses)
 
     const docRef = db.collection('modules').doc(docId)
     
@@ -265,33 +262,3 @@ app.post('/user_admin', async (req, res) => {
 app.listen(port, () => {
   console.log(`Api is runing in ${port}`)
 })
-
-// {
-//   "module_name": "Fundamentos do Next.js",
-//   "module_id": 34356347346783468,
-//   "created_by_user_id": 36376673789347982479,
-//   "classes": [
-      // {
-      //     "id": "class_847455694",
-      //     "name": "Aula 1",
-      //     "module": "Fundamentos do Next.js",
-      //     "stream_date": "14/04/2022"
-      //     "duration": "600000"
-      // },
-//       {
-//           "id": "class_8474475694",
-//           "name": "Aula 2",
-//           "duration": "600000"
-//       },
-//       {
-//           "id": "class_4898247578",
-//           "name": "Aula 3",
-//           "duration": "600000"
-//       },
-//       {
-//           "id": "class_3568967306",
-//           "name": "Aula 4",
-//           "duration": "600000"
-//       }
-//   ]
-// }
