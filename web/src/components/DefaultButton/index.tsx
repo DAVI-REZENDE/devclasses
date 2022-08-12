@@ -1,7 +1,7 @@
-import { ButtonHTMLAttributes, HTMLProps, ReactNode } from 'react'
+import { ButtonHTMLAttributes, ReactNode } from 'react'
 import styles from './styles.module.scss'
 
-type DefaultButtonProps = HTMLProps<HTMLButtonElement> & { 
+interface DefaultButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> { 
   children: ReactNode,
   full?: boolean,
   dark?: boolean,

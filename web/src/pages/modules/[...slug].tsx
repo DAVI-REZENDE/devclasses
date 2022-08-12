@@ -129,8 +129,6 @@ export default function Module({ data, createdByUser }: ModuleProps) {
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
   const { slug } = params
 
-  console.log()
-
   try {
     const data = await api.get('modules', {
       data: {

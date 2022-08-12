@@ -68,7 +68,6 @@ export default function Home({ modules }: ModulesProps) {
     router.push(`/modules/${data.module_id}/${session.user.email}`)
   }
 
-
   return (
     <main className={styles.main}>
       {session ? (
