@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
@@ -101,7 +101,7 @@ export default function Home({ modules }: ModulesProps) {
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
 
   const response = await api.get('modules').then(res => res.data)
 
